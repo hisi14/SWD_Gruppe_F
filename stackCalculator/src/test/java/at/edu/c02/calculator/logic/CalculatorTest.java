@@ -78,6 +78,16 @@ public class CalculatorTest {
 
 	}
 
+	//
+	@Test(expected = CalculatorException.class)
+	public void testModDivision() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		calc.push(3);
+		calc.push(0);
+		calc.perform(Operation.mod);
+	}
+
 	@Test
 	public void testDivisionByZero() throws Exception {
 
