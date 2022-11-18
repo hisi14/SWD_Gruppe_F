@@ -79,6 +79,6 @@ public class Parser {
 		else if ("-".equals(value))
 			return Operation.sub;
 		
-		throw new CalculatorException("Unsuppoted Operation");
+		throw new CalculatorException("Unsupported Operation");
 	}
 }
