@@ -26,7 +26,7 @@ public class EndToEndTest
         Parser parser = new Parser(cal);
         double result = parser.parse(new File("src/test/resources/modTest.xml"));
 
-        assertEquals(3, result, 0);
+        assertEquals(2, result, 0);
     }
 
     @Test(expected = CalculatorException.class)
