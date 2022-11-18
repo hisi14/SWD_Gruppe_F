@@ -29,4 +29,12 @@ public class EndToEndTest
         assertEquals(3, result, 0);
     }
 
+    @Test(expected = CalculatorException.class)
+    public void testInvalidOperation() throws Exception {
+            Calculator cal = new CalculatorImpl();
+            Parser parser = new Parser(cal);
+            double result = parser.parse(new File("src/test/resources/test05.xml"));
+
+}
+
 }
