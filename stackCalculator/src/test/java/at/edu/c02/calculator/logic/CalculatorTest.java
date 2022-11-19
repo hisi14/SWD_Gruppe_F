@@ -10,148 +10,155 @@ import at.edu.c02.calculator.CalculatorException;
 import at.edu.c02.calculator.Calculator.Operation;
 import at.edu.c02.calculator.logic.CalculatorImpl;
 
-public class CalculatorTest {
+public class CalculatorTest
+{
 
-	@Test
-	public void testSimpleAddOperation() throws Exception {
+    @Test
+    public void testSimpleAddOperation() throws Exception
+    {
 
-		//setup
-		Calculator calc = new CalculatorImpl();
-		
-		//execute
-		calc.push(2.0);
-		calc.push(3);
-		double result = calc.perform(Operation.add);
+        //setup
+        Calculator calc = new CalculatorImpl();
 
-		//verify
-		assertEquals(5, result, 0);
-		
+        //execute
+        calc.push(2.0);
+        calc.push(3);
+        double result = calc.perform(Operation.add);
 
-	}
-	
-	@Test
-	public void testSimpleMulOperation() throws Exception {
+        //verify
+        assertEquals(5, result, 0);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(2.0);
-		calc.push(3);
-		double result = calc.perform(Operation.mul);
+    }
 
-		assertEquals(6, result, 0);
+    @Test
+    public void testSimpleMulOperation() throws Exception
+    {
 
-	}
-	
-	@Test
-	public void testSimpleDivOperation() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(2.0);
+        calc.push(3);
+        double result = calc.perform(Operation.mul);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(6.0);
-		calc.push(2);
-		double result = calc.perform(Operation.div);
+        assertEquals(6, result, 0);
 
-		assertEquals(3, result, 0);
+    }
 
-	}
+    @Test
+    public void testSimpleDivOperation() throws Exception
+    {
 
-	@Test
-	public void testSimpleModOperation() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(6.0);
+        calc.push(2);
+        double result = calc.perform(Operation.div);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(6.0);
-		calc.push(2);
-		double result = calc.perform(Operation.mod);
+        assertEquals(3, result, 0);
 
-		assertEquals(0, result, 0);
+    }
 
-	}
+    @Test
+    public void testSimpleModOperation() throws Exception
+    {
 
-	@Test
-	public void testSimpleSinOperation() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(6.0);
+        calc.push(2);
+        double result = calc.perform(Operation.mod);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(30.0);
-		double result = calc.perform(Operation.sin);
+        assertEquals(0, result, 0);
 
-		assertEquals(0.5, result, 0);
+    }
 
-	}
+    @Test
+    public void testSimpleSinOperation() throws Exception
+    {
 
-	@Test
-	public void testSimpleCosOperation() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(30.0);
+        double result = calc.perform(Operation.sin);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(90.0);
-		double result = calc.perform(Operation.cos);
+        assertEquals(0.5, result, 0);
 
-		assertEquals(0, result, 0);
+    }
 
-	}
+    @Test
+    public void testSimpleCosOperation() throws Exception
+    {
 
+        Calculator calc = new CalculatorImpl();
+        calc.push(90.0);
+        double result = calc.perform(Operation.cos);
 
-	@Test
-	public void testScalarOperation() throws Exception {
-		Calculator calc = new CalculatorImpl();
-		calc.push(1.0);
-		calc.push(3.0);
-		calc.push(2.0);
-		calc.push(4.0);
-		calc.push(2.0);
-		double result = calc.perform(Operation.dotproduct);
-		assertEquals(14, result, 0);
-	}
+        assertEquals(0, result, 0);
 
+    }
 
+    @Test
+    public void testScalarOperation() throws Exception
+    {
+        Calculator calc = new CalculatorImpl();
+        calc.push(1.0);
+        calc.push(3.0);
+        calc.push(2.0);
+        calc.push(4.0);
+        calc.push(2.0);
+        double result = calc.perform(Operation.dotproduct);
+        assertEquals(14, result, 0);
+    }
 
-	@Test(expected = CalculatorException.class)
-	public void testNegativeScalarOperation() throws Exception {
-		Calculator calc = new CalculatorImpl();
-		calc.push(1.0);
-		calc.push(3.0);
-		calc.push(2.0);
-		calc.push(4.0);
-		calc.push(0.0);
-		calc.perform(Operation.dotproduct);
-	}
+    @Test(expected = CalculatorException.class)
+    public void testNegativeScalarOperation() throws Exception
+    {
+        Calculator calc = new CalculatorImpl();
+        calc.push(1.0);
+        calc.push(3.0);
+        calc.push(2.0);
+        calc.push(4.0);
+        calc.push(0.0);
+        calc.perform(Operation.dotproduct);
+    }
 
+    //
+    @Test(expected = CalculatorException.class)
+    public void testPopOnEmptyStack() throws Exception
+    {
 
+        Calculator calc = new CalculatorImpl();
+        calc.pop();
 
+    }
 
-	//
-	@Test(expected = CalculatorException.class)
-	public void testPopOnEmptyStack() throws Exception {
+    //
+    @Test(expected = CalculatorException.class)
+    public void testModDivision() throws Exception
+    {
 
-		Calculator calc = new CalculatorImpl();
-		calc.pop();
+        Calculator calc = new CalculatorImpl();
+        calc.push(3);
+        calc.push(0);
+        calc.perform(Operation.mod);
+    }
 
-	}
+    @Test
+    public void testDivisionByZero() throws Exception
+    {
 
-	//
-	@Test(expected = CalculatorException.class)
-	public void testModDivision() throws Exception {
+        //Setup
+        Calculator calc = new CalculatorImpl();
+        try
+        {
+            calc.push(2);
+            calc.push(0);
+            calc.perform(Operation.div);
 
-		Calculator calc = new CalculatorImpl();
-		calc.push(3);
-		calc.push(0);
-		calc.perform(Operation.mod);
-	}
+            fail("Exception expected");
 
-	@Test
-	public void testDivisionByZero() throws Exception {
+        }
+        catch (CalculatorException e)
+        {
+            assertEquals("Division by zero", e.getMessage());
+            // e.getCause()
+        }
 
-		//Setup
-		Calculator calc = new CalculatorImpl();
-		try {
-			calc.push(2);
-			calc.push(0);
-			calc.perform(Operation.div);
-
-			fail("Exception expected");
-			
-
-		} catch (CalculatorException e) {
-			assertEquals("Division by zero", e.getMessage());
-			// e.getCause()
-		}
-
-	}
+    }
 }

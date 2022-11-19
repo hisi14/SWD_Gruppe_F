@@ -5,7 +5,6 @@ import java.util.Stack;
 import at.edu.c02.calculator.Calculator;
 import at.edu.c02.calculator.CalculatorException;
 
-
 public class CalculatorImpl implements Calculator
 {
 
@@ -14,11 +13,10 @@ public class CalculatorImpl implements Calculator
     @Override
     public double perform(Operation op) throws CalculatorException
     {
-
         double b = pop();
         double a = 0;
 
-        if(!op.equals(Operation.sin) && !op.equals(Operation.cos))
+        if (!op.equals(Operation.sin) && !op.equals(Operation.cos) && !op.equals(Operation.dotproduct))
         {
             a = pop();
         }
@@ -48,17 +46,46 @@ public class CalculatorImpl implements Calculator
 
             case sin:
                 radians = Math.toRadians(b);
-                return Math.round(Math.sin(radians)*1000) / 1000.0;
+                return Math.round(Math.sin(radians) * 1000) / 1000.0;
 
             case cos:
                 radians = Math.toRadians(b);
-                return Math.round(Math.cos(radians)*1000) / 1000.0;
+                return Math.round(Math.cos(radians) * 1000) / 1000.0;
 
             case dotproduct:
+                int dimension = (int) b;
+                double[] vectorA = new double[dimension];
+                double[] vectorB = new double[dimension];
+                double sum = 0;
 
+                if (dimension <= 0)
+                    throw new CalculatorException("Dimension expected. Current value" + ' ' + dimension);
 
+                vectorA = GetVector(dimension);
+                vectorB = GetVector(dimension);
+
+                for (int i = 0; i < vectorA.length; i++)
+                {
+                    sum += vectorA[i] * vectorB[i];
+                }
+
+                return sum;
         }
         return 0;
+    }
+
+    private double[] GetVector(int dimension) throws CalculatorException
+    {
+        int counter = 0;
+        double[] vector = new double[dimension];
+
+        for (int i = 0; i < dimension; i++)
+        {
+            vector[counter] = pop();
+            counter++;
+        }
+
+        return vector;
     }
 
     @Override
