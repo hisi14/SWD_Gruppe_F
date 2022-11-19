@@ -54,6 +54,8 @@ public class CalculatorImpl implements Calculator
                 radians = Math.toRadians(b);
                 return Math.round(Math.cos(radians)*1000) / 1000.0;
 
+            case dotproduct:
+
 
         }
         return 0;
