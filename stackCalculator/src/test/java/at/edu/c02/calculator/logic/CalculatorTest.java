@@ -64,6 +64,28 @@ public class CalculatorTest {
 		assertEquals(0, result, 0);
 
 	}
+
+	@Test
+	public void testSimpleSinOperation() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		calc.push(30.0);
+		double result = calc.perform(Operation.sin);
+
+		assertEquals(0.5, result, 0);
+
+	}
+
+	@Test
+	public void testSimpleCosOperation() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		calc.push(90.0);
+		double result = calc.perform(Operation.cos);
+
+		assertEquals(0, result, 0);
+
+	}
 	
 	
 	
