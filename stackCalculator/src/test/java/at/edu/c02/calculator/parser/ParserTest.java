@@ -55,4 +55,20 @@ public class ParserTest {
 
 		verifyNoMoreInteractions(cal);
 	}
+
+	@Test
+	public void testParserTestScalarXML() throws Exception {
+
+		Calculator cal = mock(Calculator.class);
+
+		Parser parser = new Parser(cal);
+		parser.parse(new File("src/test/resources/dotPTest.xml"));
+
+		verify(cal).push(8.0);
+		verify(cal).push(3.0);
+		verify(cal).push(1.0);
+		verify(cal).perform(Operation.dotproduct);
+
+		verifyNoMoreInteractions(cal);
+	}
 }

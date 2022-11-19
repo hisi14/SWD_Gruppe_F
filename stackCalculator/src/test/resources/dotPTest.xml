@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calculation>
+    <push value="8" />
+    <push value="3" />
+    <push value="1" />
+    <operation value="dotP" />
+</calculation>
