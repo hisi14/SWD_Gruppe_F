@@ -86,10 +86,35 @@ public class CalculatorTest {
 		assertEquals(0, result, 0);
 
 	}
-	
-	
-	
-	
+
+
+	@Test
+	public void testScalarOperation() throws Exception {
+		Calculator calc = new CalculatorImpl();
+		calc.push(1.0);
+		calc.push(3.0);
+		calc.push(2.0);
+		calc.push(4.0);
+		calc.push(2.0);
+		double result = calc.perform(Operation.dotproduct);
+		assertEquals(14, result, 0);
+	}
+
+
+
+	@Test(expected = CalculatorException.class)
+	public void testNegativeScalarOperation() throws Exception {
+		Calculator calc = new CalculatorImpl();
+		calc.push(1.0);
+		calc.push(3.0);
+		calc.push(2.0);
+		calc.push(4.0);
+		calc.push(0.0);
+		calc.perform(Operation.dotproduct);
+	}
+
+
+
 
 	//
 	@Test(expected = CalculatorException.class)
