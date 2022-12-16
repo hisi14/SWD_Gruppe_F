@@ -5,12 +5,10 @@ import java.util.HashMap;
 public class Store
 {
     private HashMap<String,Double> storeLoadHash;
-    private CalculatorImpl cal;
 
     public Store()
     {
         storeLoadHash = new HashMap<>();
-        cal = new CalculatorImpl();
     }
 
     public void store(String key, double result)
