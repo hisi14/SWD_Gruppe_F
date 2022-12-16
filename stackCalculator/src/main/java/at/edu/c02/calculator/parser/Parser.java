@@ -3,6 +3,7 @@ package at.edu.c02.calculator.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.*;
@@ -11,15 +12,19 @@ import javax.xml.stream.events.*;
 import at.edu.c02.calculator.Calculator;
 import at.edu.c02.calculator.CalculatorException;
 import at.edu.c02.calculator.Calculator.Operation;
+import at.edu.c02.calculator.logic.Store;
 
 public class Parser {
 
 	private Calculator calc_;
+	private Store store;
 
 	public Parser(Calculator cal) {
 		if (cal == null)
 			throw new IllegalArgumentException("Calculator not set");
 		calc_ = cal;
+
+		store = new Store();
 	}
 
 	public double parse(File calculation) throws FileNotFoundException,
@@ -47,10 +52,10 @@ public class Parser {
 				result = calc_.perform(readOperation(value));
 			} else if ("store".equals(e.asStartElement().getName().getLocalPart()))
 			{
-				calc_.store(result);
+				store.store(value,result);
 			}else if ("load".equals(e.asStartElement().getName().getLocalPart()))
 			{
-				result = calc_.load();
+				result = store.load(value);
 			}
 		}
 

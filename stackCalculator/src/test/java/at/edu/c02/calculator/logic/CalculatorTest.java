@@ -37,6 +37,32 @@ public class CalculatorTest
     }
 
     @Test
+    public void testStoreAndLoadB() throws CalculatorException
+    {
+        //setup
+        Calculator calc = new CalculatorImpl();
+        Store store = new Store();
+
+        //execute
+        calc.push(2.0);
+        calc.push(3);
+        double result = calc.perform(Operation.add);
+        store.store(null, result);
+
+        calc.push(5.0);
+        calc.push(5);
+        result = calc.perform(Operation.mul);
+        store.store("B", result);
+
+        calc.push(store.load(null));
+        calc.push(store.load("B"));
+        result = calc.perform(Operation.add);
+
+        //verify
+        assertEquals(30, result, 0);
+    }
+
+    @Test
     public void testSimpleAddOperation() throws Exception
     {
 
