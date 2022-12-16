@@ -9,6 +9,7 @@ public class CalculatorImpl implements Calculator
 {
 
     private Stack<Double> stack_ = new Stack<Double>();
+    private double store;
 
     @Override
     public double perform(Operation op) throws CalculatorException
@@ -109,5 +110,10 @@ public class CalculatorImpl implements Calculator
     {
         stack_.clear();
     }
+
+    public void store(double v){store = v;}
+
+    public double load() {return store;}
+
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calculation>
+    <push value="2" />
+    <push value="3" />
+    <operation value="+" />
+    <store/>
+    <push value="Result" />
+    <push value="4" />
+    <operation value="+" />
+    <push value="Result"/>
+    <load/>
+    <push value="Result"/>
+    <operation value="*"/>
+    <store/>
+    <push value="2"/>
+    <push value="Result"/>
+    <operation value="+"/>
+</calculation>

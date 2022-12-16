@@ -20,6 +20,16 @@ public class EndToEndTest
     }
 
     @Test
+    public void testXmlStoreLoad() throws Exception {
+
+        Calculator cal = new CalculatorImpl();
+        Parser parser = new Parser(cal);
+        double result = parser.parse(new File("src/test/resources/testStoreLoadA.xml"));
+
+        assertEquals(47, result, 0);
+    }
+
+    @Test
     public void testXmlMod() throws Exception {
 
         Calculator cal = new CalculatorImpl();
