@@ -13,6 +13,26 @@ import at.edu.c02.calculator.logic.CalculatorImpl;
 public class CalculatorTest
 {
 
+
+    @Test(expected = CalculatorException.class)
+    public void testLoadWrong() throws CalculatorException
+    {
+        //setup
+        Calculator calc = new CalculatorImpl();
+        Store store = new Store();
+
+        //execute
+        calc.push(2.0);
+        calc.push(3);
+        double result = calc.perform(Operation.add);
+        store.store(null, result);
+
+        calc.push(store.load("null"));
+
+        //verify
+        assertEquals(30, result, 0);
+    }
+
     @Test
     public void testStoreAndLoad() throws CalculatorException
     {
